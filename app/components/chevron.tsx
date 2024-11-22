@@ -6,9 +6,6 @@ interface ChevronProps {
 }
 
 export function Chevron({ position, scale }: ChevronProps) {
-  console.log(styles);
-  console.log(position);
-
   const marginTop = -30;
 
   let imageBottom = 0;
@@ -36,7 +33,6 @@ export function Chevron({ position, scale }: ChevronProps) {
   const zIndex = 100 - position;
 
   let display = 'block';
-  console.log(position, scale);
   if ((position) > scale) {
     display = 'none';
   }
@@ -54,7 +50,7 @@ export function Chevron({ position, scale }: ChevronProps) {
       <div className={styles['chevron-controls']}>
         <input className={styles.title} type="text"/>
         {/* <Image src={Points} alt="points" className={styles['points-img']} width={313} height={104} style={{bottom: imageBottom}} loading="eager" /> */}
-        <img src="/points.png" alt="points" className={styles['points-img']} style={{bottom: imageBottom, height: 104}} />
+        <img src="points.png" alt="points" className={styles['points-img']} style={{bottom: imageBottom, height: 104}} />
         <textarea className={styles.skillbody}></textarea>
         <input className={styles.body} type="number" maxLength={1} min="0" max="9" defaultValue="1" style={{bottom: bodySoulBottom}}/>
         <input className={styles.mind} type="number" maxLength={1} min="0" max="9" defaultValue="1" style={{bottom: mindBottom}}/>
@@ -104,7 +100,7 @@ export function ParentChevron({ scale }: ParentChevronProps) {
       </div>
       <div className={styles['parent-chevron-controls']}>
         <input className={styles.title} type="text" placeholder='Epic Talent'/>
-        <img src="/points.png" alt="points" className={styles['points-img']} style={{bottom: imageBottom, height: 104}} />
+        <img src="points.png" alt="points" className={styles['points-img']} style={{bottom: imageBottom, height: 104}} />
         <textarea className={styles.skillbody} placeholder="Some awesome, incredible, homebrew'd talent"></textarea>
         <input className={styles.body} type="number" maxLength={1} min="0" max="9" defaultValue="1" style={{bottom: bodySoulBottom}}/>
         <input className={styles.mind} type="number" maxLength={1} min="0" max="9" defaultValue="1" style={{bottom: mindBottom}}/>

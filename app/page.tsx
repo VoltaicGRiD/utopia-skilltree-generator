@@ -1,6 +1,5 @@
 'use client';
 
-import Image from "next/image";
 import styles from "./page.module.css";
 import { ParentChevron, Chevron } from "./components/chevron";
 import { useState, useRef, useEffect } from "react";
@@ -155,7 +154,7 @@ export default function Home() {
         </div> */}
 
       </main>
-      <footer className={styles.footer}>
+      {/* <footer className={styles.footer}>
         <a
           href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
           target="_blank"
@@ -198,7 +197,7 @@ export default function Home() {
           />
           Go to nextjs.org →
         </a>
-      </footer>
+      </footer> */}
     </div>
   );
 
