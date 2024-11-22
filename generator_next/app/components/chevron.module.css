@@ -1,0 +1,269 @@
+
+
+.page {
+  --gray-rgb: 0, 0, 0;
+  --gray-alpha-200: rgba(var(--gray-rgb), 0.08);
+  --gray-alpha-100: rgba(var(--gray-rgb), 0.05);
+
+  --button-primary-hover: #383838;
+  --button-secondary-hover: #f2f2f2;
+
+  display: grid;
+  grid-template-rows: 20px 1fr 20px;
+  align-items: center;
+  justify-items: center;
+  min-height: 100svh;
+  padding: 20px;
+  font-family: var(--font-geist-sans);
+}
+
+@media (prefers-color-scheme: dark) {
+  .page {
+    --gray-rgb: 255, 255, 255;
+    --gray-alpha-200: rgba(var(--gray-rgb), 0.145);
+    --gray-alpha-100: rgba(var(--gray-rgb), 0.06);
+
+    --button-primary-hover: #ccc;
+    --button-secondary-hover: #1a1a1a;
+  }
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  grid-row-start: 2;
+}
+
+.treehome {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  background-color: rgb(30, 30, 30);
+  width: 700px;
+  height: 700px;
+}
+
+a.primary {
+  background: var(--foreground);
+  color: var(--background);
+  gap: 8px;
+}
+
+a.secondary {
+  border-color: var(--gray-alpha-200);
+  min-width: 180px;
+}
+
+.footer {
+  grid-row-start: 3;
+  display: flex;
+  gap: 24px;
+}
+
+.footer a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.footer img {
+  flex-shrink: 0;
+}
+
+/* Enable hover only on non-touch devices */
+@media (hover: hover) and (pointer: fine) {
+  a.primary:hover {
+    background: var(--button-primary-hover);
+    border-color: transparent;
+  }
+
+  a.secondary:hover {
+    background: var(--button-secondary-hover);
+    border-color: transparent;
+  }
+
+  .footer a:hover {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+}
+
+.chevron-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.chevron-svg {
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+
+.chevron {
+  height: 100%;
+  width: 100%;
+  fill: rgb(49, 36, 9);
+  /* background: radial-gradient(circle, #b9c2ca 0%, #616569 100%); */
+  stroke: white;
+  stroke-width: 1%;
+  stroke-linecap: round;
+  mask-clip: url(#chevronClip);
+}
+
+#myGradient {
+  fill: url(#myGradient);
+}
+
+.title {
+  position: absolute;
+  top: 5%;
+  left: 0;
+  width: 100%;
+  height: 10%;
+  background-color: transparent;
+  text-align: center;
+  border: none;
+  font-family: "Russo One", sans-serif;
+  font-size: 1.1em;
+  font-weight: 300;
+  color: white;
+  text-transform: uppercase;
+}
+
+.chevron-controls {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+}
+
+.points-img {
+  position: absolute;
+  bottom: -20%;
+  left: 50%;
+  width: 50%;
+  transform: translate(-50%, 0);
+  object-fit: contain;
+}
+
+.skillbody {
+  position: absolute;
+  width: 85%;
+  text-align: center;
+  left: 50%;
+  top: 46%;
+  transform: translate(-50%, -50%);
+  height: 60%;
+  font-size: 0.72em;
+  font-family: "Hanuman", serif;
+  background: transparent;
+  border: none;
+  resize: none;
+  justify-content: center;
+  align-content: center;
+}
+
+.body, .mind, .soul {
+  color: white;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  font-size: 1.3em;
+  font-family: "Hanuman", serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+  background-color: transparent;
+  width: 20px;  
+  text-align: center;
+  border: none;
+  filter: drop-shadow(0px 0px 4px black);
+  text-shadow: 0px 0px 4px black, 0.5px 0.5px 1px black;
+  z-index: 1000;
+  -moz-appearance:textfield; /* Firefox */
+}
+  
+  .body::-webkit-outer-spin-button,
+  .body::-webkit-inner-spin-button {
+      /* display: none; <- Crashes Chrome on hover */
+      -webkit-appearance: none;
+      margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+  }
+
+  .mind::-webkit-outer-spin-button,
+  .mind::-webkit-inner-spin-button {
+      /* display: none; <- Crashes Chrome on hover */
+      -webkit-appearance: none;
+      margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+  }
+
+  .soul::-webkit-outer-spin-button,
+  .soul::-webkit-inner-spin-button {
+      /* display: none; <- Crashes Chrome on hover */
+      -webkit-appearance: none;
+      margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+  }
+
+.parent-chevron-controls {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+}
+
+.body {
+  left: 31%;
+}
+
+.mind {
+  left: 50%;
+}
+
+.soul {
+  left: 68.5%;
+}
+
+@media (max-width: 600px) {
+  .page {
+    padding: 32px;
+    padding-bottom: 80px;
+  }
+
+  .main {
+    align-items: center;
+  }
+
+  .main ol {
+    text-align: center;
+  }
+
+  .ctas {
+    flex-direction: column;
+  }
+
+  .ctas a {
+    font-size: 14px;
+    height: 40px;
+    padding: 0 16px;
+  }
+
+  a.secondary {
+    min-width: auto;
+  }
+
+  .footer {
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .logo {
+    filter: invert();
+  }
+}
