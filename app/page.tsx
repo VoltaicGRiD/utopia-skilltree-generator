@@ -1,14 +1,13 @@
 'use client';
 
 import Image from "next/image";
-import Points from '../assets/tree/points.png';
 import styles from "./page.module.css";
 import { ParentChevron, Chevron } from "./components/chevron";
 import { useState, useRef, useEffect } from "react";
 import domtoimage from 'dom-to-image-more';
 
 export default function Home() {
-  const divRef = useRef(null);
+  const divRef = useRef<HTMLDivElement>(null);
 
   const [scale, setScale] = useState(3);
 
@@ -22,35 +21,34 @@ export default function Home() {
 
   const handleExport = async () => {
     const node = divRef.current;
+    if (!node) return;
     const inputs = node.querySelectorAll('input');
 
     // Replace inputs with spans
     inputs.forEach((input) => {
       const span = document.createElement('span');
       span.textContent = input.value;
-      span.setAttribute('style', input.getAttribute('style'));
+      span.setAttribute('style', input.getAttribute('style') || '');
       span.className = input.className;
       span.style.webkitTextStroke = '1px white;';
       span.style.fontWeight = 'bold';
-      input.parentNode.replaceChild(span, input);
+      if (input.parentNode) {
+        input.parentNode.replaceChild(span, input);
+      }
     });
 
-    const images = node.querySelectorAll('Image');
-    images.forEach((image) => {
-      console.log(image.src);
-      const img = document.createElement('img');
-      img.src = image.src;
-      img.className = image.className;
-      img.setAttribute('style', image.getAttribute('style'));
-      image.parentNode.replaceChild(img, image);
-    });
+    // We discard this since the image needs to be processed twice to get the correct alignment of objects
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const _ = domtoimage.toPng(node, { scale: 5 });
 
     domtoimage.toPng(node, { scale: 5 })
       .then((dataUrl) => {
         // Revert spans back to inputs
         const spans = node.querySelectorAll('span');
         spans.forEach((span, index) => {
-          span.parentNode.replaceChild(inputs[index], span);
+          if (span.parentNode) {
+            span.parentNode.replaceChild(inputs[index], span);
+          }
         });
 
         const link = document.createElement('a');
@@ -63,23 +61,23 @@ export default function Home() {
       });
   };
 
-  function updateColorOne(event) {
+  function updateColorOne(event: React.ChangeEvent<HTMLInputElement>): void {
     const newColor = event.target.value;
     setColor1(newColor);
   }
 
-  function updateStopOne(event) {
-    const newStop = event.target.value;
+  function updateStopOne(event: React.ChangeEvent<HTMLInputElement>): void {
+    const newStop = Number(event.target.value);
     setStop1(newStop);
   }
 
-  function updateColorTwo(event) {
+  function updateColorTwo(event: React.ChangeEvent<HTMLInputElement>): void {
     const newColor = event.target.value;
     setColor2(newColor);
   }
 
-  function updateStopTwo(event) {
-    const newStop = event.target.value;
+  function updateStopTwo(event: React.ChangeEvent<HTMLInputElement>): void {
+    const newStop = Number(event.target.value);
     setStop2(newStop);
   }
 

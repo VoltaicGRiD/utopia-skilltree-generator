@@ -1,13 +1,15 @@
 import styles from './chevron.module.css';
-import Points from '../assets/tree/points.png';
-import Image from 'next/image';
 
-export function Chevron({ position, scale }) {
+interface ChevronProps {
+  position: number;
+  scale: number;
+}
+
+export function Chevron({ position, scale }: ChevronProps) {
   console.log(styles);
   console.log(position);
 
-  let marginTop = -30;
-  //let marginTop = -13 * ((position - 1));
+  const marginTop = -30;
 
   let imageBottom = 0;
   let bodySoulBottom = 0;
@@ -30,8 +32,7 @@ export function Chevron({ position, scale }) {
       break;
   }
 
-  let height = (700 + (26 * scale)) / scale;
-  //height = height + -marginTop / 2;
+  const height = (700 + (26 * scale)) / scale;
   const zIndex = 100 - position;
 
   let display = 'block';
@@ -63,8 +64,12 @@ export function Chevron({ position, scale }) {
   )
 }
 
-export function ParentChevron({ scale }) {
-  let height = (700 + (26 * scale)) / scale;
+interface ParentChevronProps {
+  scale: number;
+}
+
+export function ParentChevron({ scale }: ParentChevronProps) {
+  const height = (700 + (26 * scale)) / scale;
 
   let imageBottom = 0;
   let bodySoulBottom = 0;
