@@ -19,12 +19,12 @@ export function Chevron({ position, scale }: ChevronProps) {
       break;
     case 4:
       imageBottom = -25;
-      bodySoulBottom = 0;
+      bodySoulBottom = -1;
       mindBottom = -7;
       break;
     case 5:
       imageBottom = -30;
-      bodySoulBottom = -5;
+      bodySoulBottom = -6;
       mindBottom = -12;
       break;
   }
@@ -52,9 +52,9 @@ export function Chevron({ position, scale }: ChevronProps) {
         {/* <Image src={Points} alt="points" className={styles['points-img']} width={313} height={104} style={{bottom: imageBottom}} loading="eager" /> */}
         <img src="points.png" alt="points" className={styles['points-img']} style={{bottom: imageBottom, height: 104}} />
         <textarea className={styles.skillbody}></textarea>
-        <input className={styles.body} type="number" maxLength={1} min="0" max="9" defaultValue="1" style={{bottom: bodySoulBottom}}/>
-        <input className={styles.mind} type="number" maxLength={1} min="0" max="9" defaultValue="1" style={{bottom: mindBottom}}/>
-        <input className={styles.soul} type="number" maxLength={1} min="0" max="9" defaultValue="1" style={{bottom: bodySoulBottom}}/>
+        <input className={styles.body} type="number" maxLength={1} min="0" max="9" defaultValue="0" style={{bottom: bodySoulBottom}}/>
+        <input className={styles.mind} type="number" maxLength={1} min="0" max="9" defaultValue="0" style={{bottom: mindBottom}}/>
+        <input className={styles.soul} type="number" maxLength={1} min="0" max="9" defaultValue="0" style={{bottom: bodySoulBottom}}/>
       </div>
     </div>
   )
@@ -78,12 +78,12 @@ export function ParentChevron({ scale }: ParentChevronProps) {
       break;
     case 4:
       imageBottom = -25;
-      bodySoulBottom = 0;
+      bodySoulBottom = -1;
       mindBottom = -7;
       break;
     case 5:
       imageBottom = -30;
-      bodySoulBottom = -5;
+      bodySoulBottom = -6;
       mindBottom = -12;
       break;
   }
@@ -102,9 +102,9 @@ export function ParentChevron({ scale }: ParentChevronProps) {
         <input className={styles.title} type="text" placeholder='Epic Talent'/>
         <img src="points.png" alt="points" className={styles['points-img']} style={{bottom: imageBottom, height: 104}} />
         <textarea className={styles.skillbody} placeholder="Some awesome, incredible, homebrew'd talent"></textarea>
-        <input className={styles.body} type="number" maxLength={1} min="0" max="9" defaultValue="1" style={{bottom: bodySoulBottom}}/>
-        <input className={styles.mind} type="number" maxLength={1} min="0" max="9" defaultValue="1" style={{bottom: mindBottom}}/>
-        <input className={styles.soul} type="number" maxLength={1} min="0" max="9" defaultValue="1" style={{bottom: bodySoulBottom}}/>
+        <input className={styles.body} type="number" maxLength={1} min="0" max="9" defaultValue="0" style={{bottom: bodySoulBottom}}/>
+        <input className={styles.mind} type="number" maxLength={1} min="0" max="9" defaultValue="0" style={{bottom: mindBottom}}/>
+        <input className={styles.soul} type="number" maxLength={1} min="0" max="9" defaultValue="0" style={{bottom: bodySoulBottom}}/>
       </div>
     </div>
   );
