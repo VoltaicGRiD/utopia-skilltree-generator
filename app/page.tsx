@@ -4,8 +4,6 @@ import styles from "./page.module.css";
 import { ParentChevron, Chevron } from "./components/chevron";
 import { useState, useRef, useEffect } from "react";
 import domtoimage from 'dom-to-image-more';
-import { text } from "stream/consumers";
-import { textShadow } from "html2canvas/dist/types/css/property-descriptors/text-shadow";
 
 export default function Home() {
   const divRef = useRef<HTMLDivElement>(null);
@@ -16,8 +14,10 @@ export default function Home() {
   const [color1, setColor1] = useState('#474747');
   const [color2, setColor2] = useState('#555555');
 
-  const [textColor, setTextColor] = useState('#ffffff');
-  const [shadowColor, setShadowColor] = useState('#000000');
+  // Add state variables for text colors
+  const [textColor] = useState('#ffffff');
+  const [pointColor] = useState('#ffffff');
+  const [shadowColor] = useState('#000000');
 
   // Add state variables for gradient stops
   const [stop1, setStop1] = useState(0);
@@ -79,10 +79,16 @@ export default function Home() {
     root.style.setProperty('--text-color', newColor);
   }
 
+  function updatePointColor(event: React.ChangeEvent<HTMLInputElement>): void {
+    const newColor = event.target.value;
+    const root = document.querySelector(':root') as HTMLElement;
+    root.style.setProperty('--point-color', newColor);
+  }
+
   function updateShadowColor(event: React.ChangeEvent<HTMLInputElement>): void {
     const newColor = event.target.value;
     const root = document.querySelector(':root') as HTMLElement;
-    root.style.setProperty('--text-color', newColor);
+    root.style.setProperty('--text-shadow', newColor);
   }
 
   function updateColorOne(event: React.ChangeEvent<HTMLInputElement>): void {
@@ -107,9 +113,12 @@ export default function Home() {
 
   useEffect(() => {
     document.querySelector('#text-color')?.setAttribute('value', textColor);
+    document.querySelector('#point-color')?.setAttribute('value', pointColor);
     document.querySelector('#text-shadow-color')?.setAttribute('value', shadowColor);
     document.querySelector('#inner-gradient')?.setAttribute('value', color1);
     document.querySelector('#outer-gradient')?.setAttribute('value', color2);
+    document.querySelector('#inner-position')?.setAttribute('value', stop1.toString());
+    document.querySelector('#outer-position')?.setAttribute('value', stop2.toString());
   }, []);
 
   return (
@@ -141,15 +150,19 @@ export default function Home() {
         <div className={styles.controls}>
           <div className={styles['control-label']}>
             <label htmlFor="text-color">Text Color</label>
-            <input id="text-color" name="text-color" type="color" onChange={updateTextColor} value="#000000"/>
+            <input id="text-color" name="text-color" type="color" onChange={updateTextColor} />
           </div>
           <div className={styles['control-label']}>
-            <label htmlFor="text-shadow-color">Text Shadow Color</label>
-            <input id="text-shadow-color" name="text-shadow-color" type="color" onChange={updateShadowColor} value="#ffffff"/>
+            <label htmlFor="point-color">Point Number Text Color</label>
+            <input id="point-color" name="point-color" type="color" onChange={updatePointColor} />
+          </div>
+          <div className={styles['control-label']}>
+            <label htmlFor="point-shadow">Point Number Shadow Color</label>
+            <input id="point-shadow" name="point-shadow" type="color" onChange={updateShadowColor} />
           </div>
           <div className={styles['control-label']}>
             <label htmlFor="inner-gradient">Inner Gradient</label>
-            <input id="inner-gradient" name="inner-gradient" type="color" onChange={updateColorOne}/>
+            <input id="inner-gradient" name="inner-gradient" type="color" onChange={updateColorOne} />
           </div>
           <div className={styles['control-label']}>
             <label htmlFor="inner-position">Inner Gradient Position</label>
