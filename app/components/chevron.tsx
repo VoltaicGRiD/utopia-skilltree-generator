@@ -73,7 +73,7 @@ export function ParentChevron({ scale }: ParentChevronProps) {
   switch (scale) {
     case 3:
       imageBottom = -20;
-      bodySoulBottom = 3;
+      bodySoulBottom = 2;
       mindBottom = -2.5;
       break;
     case 4:

@@ -33,6 +33,7 @@
   min-height: 100svh;
   padding: 20px;
   font-family: var(--font-geist-sans);
+  overflow: none;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -54,6 +55,7 @@
   align-content: center;
   justify-content: center;
   gap: 16px;
+  overflow: none;
 }
 
 .controls {
@@ -89,18 +91,6 @@
   width: 200px;
   gap: 0px;
 }
-
-.threetier, .fourtier, .fivetier {
-  display: none;
-}
-
-  .threetier.active, .fourtier.active, .fivetier.active {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 0px;
-  }
 
 a.primary {
   background: var(--foreground);

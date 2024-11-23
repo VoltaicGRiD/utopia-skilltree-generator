@@ -18,7 +18,7 @@ export default function Home() {
   const [stop1, setStop1] = useState(0);
   const [stop2, setStop2] = useState(100);
 
-  const handleExport = async () => {
+  const handleExport = async (file: boolean) => {
     const node = divRef.current;
     if (!node) return;
     const inputs = node.querySelectorAll('input');
@@ -38,7 +38,9 @@ export default function Home() {
 
     // We discard this since the image needs to be processed twice to get the correct alignment of objects
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const _ = domtoimage.toPng(node, { scale: 5 });
+    const _ = domtoimage.toPng(node, { scale: 5 }).then((dataUrl) => {
+      return;
+    });
 
     domtoimage.toPng(node, { scale: 5 })
       .then((dataUrl) => {
@@ -50,15 +52,21 @@ export default function Home() {
           }
         });
 
-        const link = document.createElement('a');
-        link.download = 'exported-image.png';
-        link.href = dataUrl;
-        link.click();
+        if (file) {
+          const link = document.createElement('a');
+          link.download = 'exported-image.png';
+          link.href = dataUrl;
+          link.click();
+        }
       })
       .catch((error) => {
         console.error('Failed to export image:', error);
       });
   };
+
+  useEffect(() => {
+    handleExport(false);
+  }, []);
 
   function updateColorOne(event: React.ChangeEvent<HTMLInputElement>): void {
     const newColor = event.target.value;
@@ -128,31 +136,9 @@ export default function Home() {
             <input name="outer-position" type="number" onChange={updateStopTwo} placeholder="95"/>
           </div>
           <div className={styles['control-label']}>
-            <button className={styles.control} onClick={handleExport}>Export Image</button>
+            <button className={styles.control} onClick={() => handleExport(true)}>Export Image</button>
           </div>
         </div>
-
-        {/* <div className={`${styles.treehome} ${styles.threetier}`}>
-          <ParentChevron scale={3}/>
-          <Chevron position={2} scale={3}/>
-          <Chevron position={3} scale={3}/>
-        </div>
-
-        <div className={`${styles.treehome} ${styles.fourtier}`}>
-          <ParentChevron scale={4}/>
-          <Chevron position={2} scale={4}/>
-          <Chevron position={3} scale={4}/>
-          <Chevron position={4} scale={4}/>
-        </div>
-
-        <div className={`${styles.treehome} ${styles.fivetier}`}>
-          <ParentChevron scale={5}/>
-          <Chevron position={2} scale={5}/>
-          <Chevron position={3} scale={5}/>
-          <Chevron position={4} scale={5}/>
-          <Chevron position={5} scale={5}/>
-        </div> */}
-
       </main>
       {/* <footer className={styles.footer}>
         <a
@@ -200,6 +186,4 @@ export default function Home() {
       </footer> */}
     </div>
   );
-
 }
-
