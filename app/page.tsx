@@ -4,6 +4,8 @@ import styles from "./page.module.css";
 import { ParentChevron, Chevron } from "./components/chevron";
 import { useState, useRef, useEffect } from "react";
 import domtoimage from 'dom-to-image-more';
+import { text } from "stream/consumers";
+import { textShadow } from "html2canvas/dist/types/css/property-descriptors/text-shadow";
 
 export default function Home() {
   const divRef = useRef<HTMLDivElement>(null);
@@ -13,6 +15,9 @@ export default function Home() {
   // Add state variables for gradient colors
   const [color1, setColor1] = useState('#474747');
   const [color2, setColor2] = useState('#555555');
+
+  const [textColor, setTextColor] = useState('#ffffff');
+  const [shadowColor, setShadowColor] = useState('#000000');
 
   // Add state variables for gradient stops
   const [stop1, setStop1] = useState(0);
@@ -68,6 +73,18 @@ export default function Home() {
     handleExport(false);
   }, []);
 
+  function updateTextColor(event: React.ChangeEvent<HTMLInputElement>): void {
+    const newColor = event.target.value;
+    const root = document.querySelector(':root') as HTMLElement;
+    root.style.setProperty('--text-color', newColor);
+  }
+
+  function updateShadowColor(event: React.ChangeEvent<HTMLInputElement>): void {
+    const newColor = event.target.value;
+    const root = document.querySelector(':root') as HTMLElement;
+    root.style.setProperty('--text-color', newColor);
+  }
+
   function updateColorOne(event: React.ChangeEvent<HTMLInputElement>): void {
     const newColor = event.target.value;
     setColor1(newColor);
@@ -89,7 +106,10 @@ export default function Home() {
   }
 
   useEffect(() => {
-
+    document.querySelector('#text-color')?.setAttribute('value', textColor);
+    document.querySelector('#text-shadow-color')?.setAttribute('value', shadowColor);
+    document.querySelector('#inner-gradient')?.setAttribute('value', color1);
+    document.querySelector('#outer-gradient')?.setAttribute('value', color2);
   }, []);
 
   return (
@@ -120,20 +140,28 @@ export default function Home() {
 
         <div className={styles.controls}>
           <div className={styles['control-label']}>
+            <label htmlFor="text-color">Text Color</label>
+            <input id="text-color" name="text-color" type="color" onChange={updateTextColor} value="#000000"/>
+          </div>
+          <div className={styles['control-label']}>
+            <label htmlFor="text-shadow-color">Text Shadow Color</label>
+            <input id="text-shadow-color" name="text-shadow-color" type="color" onChange={updateShadowColor} value="#ffffff"/>
+          </div>
+          <div className={styles['control-label']}>
             <label htmlFor="inner-gradient">Inner Gradient</label>
-            <input name="inner-gradient" type="color" onChange={updateColorOne}/>
+            <input id="inner-gradient" name="inner-gradient" type="color" onChange={updateColorOne}/>
           </div>
           <div className={styles['control-label']}>
             <label htmlFor="inner-position">Inner Gradient Position</label>
-            <input name="inner-position" type="number" onChange={updateStopOne} placeholder="10"/>
+            <input id="inner-position" name="inner-position" type="number" onChange={updateStopOne} placeholder="10"/>
           </div>
           <div className={styles['control-label']}>
             <label htmlFor="outer-gradient">Outer Gradient</label>
-            <input name="outer-gradient" type="color" onChange={updateColorTwo}/>
+            <input id="outer-gradient" name="outer-gradient" type="color" onChange={updateColorTwo}/>
           </div>
           <div className={styles['control-label']}>
             <label htmlFor="outer-position">Outer Gradient Position</label>
-            <input name="outer-position" type="number" onChange={updateStopTwo} placeholder="95"/>
+            <input id="outer-position" name="outer-position" type="number" onChange={updateStopTwo} placeholder="95"/>
           </div>
           <div className={styles['control-label']}>
             <button className={styles.control} onClick={() => handleExport(true)}>Export Image</button>

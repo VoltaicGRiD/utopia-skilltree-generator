@@ -48,7 +48,7 @@ export function Chevron({ position, scale }: ChevronProps) {
         </svg>
       </div>
       <div className={styles['chevron-controls']}>
-        <input className={styles.title} type="text"/>
+        <input className={styles.title} type="text" />
         {/* <Image src={Points} alt="points" className={styles['points-img']} width={313} height={104} style={{bottom: imageBottom}} loading="eager" /> */}
         <img src="points.png" alt="points" className={styles['points-img']} style={{bottom: imageBottom, height: 104}} />
         <textarea className={styles.skillbody}></textarea>
@@ -99,12 +99,12 @@ export function ParentChevron({ scale }: ParentChevronProps) {
         </svg>
       </div>
       <div className={styles['parent-chevron-controls']}>
-        <input className={styles.title} type="text" placeholder='Epic Talent'/>
+        <input className={styles.title} type="text" placeholder='Epic Talent' />
         <img src="points.png" alt="points" className={styles['points-img']} style={{bottom: imageBottom, height: 104}} />
-        <textarea className={styles.skillbody} placeholder="Some awesome, incredible, homebrew'd talent"></textarea>
-        <input className={styles.body} type="number" maxLength={1} min="0" max="9" defaultValue="0" style={{bottom: bodySoulBottom}}/>
-        <input className={styles.mind} type="number" maxLength={1} min="0" max="9" defaultValue="0" style={{bottom: mindBottom}}/>
-        <input className={styles.soul} type="number" maxLength={1} min="0" max="9" defaultValue="0" style={{bottom: bodySoulBottom}}/>
+        <textarea className={styles.skillbody} placeholder="Some awesome, incredible, homebrew'd talent" ></textarea>
+        <input className={styles.body} type="number" maxLength={1} min="0" max="9" defaultValue="0" style={{ bottom: bodySoulBottom}}/>
+        <input className={styles.mind} type="number" maxLength={1} min="0" max="9" defaultValue="0" style={{ bottom: mindBottom}}/>
+        <input className={styles.soul} type="number" maxLength={1} min="0" max="9" defaultValue="0" style={{ bottom: bodySoulBottom}}/>
       </div>
     </div>
   );
