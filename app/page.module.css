@@ -18,6 +18,13 @@
   src: url(https://fonts.gstatic.com/s/russoone/v16/Z9XUDmZRWg6M1LvRYsHOz8mJ.woff2) format('woff2');
 }
 
+@font-face {
+  font-family: 'Bahnschrift';
+  font-stretch: condensed;
+  font-display: swap;
+  font-style: normal;
+}
+
 .page {
   --gray-rgb: 0, 0, 0;
   --gray-alpha-200: rgba(var(--gray-rgb), 0.08);
@@ -80,10 +87,10 @@
   flex-direction: column;
   align-content: center;
   justify-content: center;
-  gap: 2;
+  gap: 5px;
   z-index: 2000;
   text-align: center;
-  width: 200px;
+  width: 165px;
 }
 
 .trees {
@@ -123,13 +130,17 @@
   flex-direction: column;
 }
 
+.export {
+  width: 165px;
+}
+
 .treehome {
   position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 200px;
+  width: 170px;
   gap: 0px;
 }
 

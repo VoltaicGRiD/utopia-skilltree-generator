@@ -34,20 +34,22 @@
 .title {
   position: absolute;
   color: var(--text-color);
-  top: 5%;
+  top: 4%;
   left: 50%;
   transform: translate(-50%, 0);
   width: 95%;
   height: 2.3em;
+  font-weight: 900;
   overflow-y: hidden;
+  font-synthesis: weight;
   align-content: start;
   justify-content: start;
   background-color: transparent;
   text-align: center;
   border: none;
-  font-family: "Russo One", sans-serif;
-  font-size: 1.1em;
-  font-weight: 300;
+  font-family: var(--font-bahnschrift);
+  font-size: 0.75em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   resize: none;
 }
@@ -81,7 +83,16 @@
     display: flex;
   }
 
+.control-group {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  justify-content: center;
+  gap: 5px;
+}
+
 .control-label {
+  width: 50%;
   display: flex;
   flex-direction: column;
 }
@@ -97,18 +108,19 @@
 
 .skillbody {
   position: absolute;
-  width: 90%;
+  width: 87%;
   text-align: center;
   color: var(--text-color);
   left: 50%;
-  top: 46%;
+  top: 50%;
   transform: translate(-50%, -50%);
   height: 60%;
   font-size: var(--text-size);
-  font-family: "Hanuman", serif;
+  font-family: var(--font-bahnschrift);
   background: transparent;
   border: none;
   resize: none;
+  font-stretch: condensed;
   justify-content: center;
   align-content: center;
   overflow: hidden;
@@ -118,11 +130,9 @@
   transform: translate(-50%, -50%);
   position: absolute;
   color: var(--point-color);
-  font-size: 1.3em;
-  font-family: "Hanuman", serif;
+  font-size: 0.75em;
+  font-family: var(--font-bahnschrift);
   font-optical-sizing: auto;
-  font-weight: 500;
-  font-style: normal;
   background-color: transparent;
   width: 40px;  
   text-align: center;

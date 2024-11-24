@@ -4,7 +4,7 @@
   --text-color: #fff;
   --point-color: #fff;
   --text-shadow: #000;
-  --text-size: 0.72rem;
+  --text-size: 0.88rem;
 }
 
 @media (prefers-color-scheme: dark) {

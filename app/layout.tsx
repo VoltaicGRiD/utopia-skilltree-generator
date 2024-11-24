@@ -12,6 +12,11 @@ const geistMono = localFont({
   variable: "--font-geist-mono",
   weight: "100 900",
 });
+const bahnschrift = localFont({
+  src: "./fonts/bahnschrift.ttf",
+  variable: "--font-bahnschrift",
+  weight: "100 900",
+});
 
 export const metadata: Metadata = {
   title: "Utopia Skill Tree Builder - Next.js",
@@ -25,7 +30,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
+      <body className={`${geistSans.variable} ${geistMono.variable} ${bahnschrift.variable}`}>
         {children}
       </body>
     </html>

@@ -2,11 +2,14 @@
 
 import styles from "./page.module.css";
 import { ParentChevron, Chevron } from "./components/chevron";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, RefObject } from "react";
 import domtoimage from 'dom-to-image-more';
 
 export default function Home() {
   const divRef = useRef<HTMLDivElement>(null);
+  const colOneRef = useRef<HTMLDivElement>(null);
+  const colTwoRef = useRef<HTMLDivElement>(null);
+  const colThreeRef = useRef<HTMLDivElement>(null);
 
   // This state variable is used for the scale of the tree
   const [columnOneScale, setColumnOneScale] = useState(3);
@@ -26,8 +29,8 @@ export default function Home() {
   const [stop1, setStop1] = useState(0);
   const [stop2, setStop2] = useState(100);
 
-  const handleExport = async (file: boolean) => {
-    const node = divRef.current;
+  const handleExport = async (file: boolean, ref: RefObject<HTMLDivElement>) => {
+    const node = ref.current;
     if (!node) return;
     const inputs = node.querySelectorAll('input');
 
@@ -38,7 +41,6 @@ export default function Home() {
       span.setAttribute('style', input.getAttribute('style') || '');
       span.className = input.className;
       span.style.webkitTextStroke = '1px white;';
-      span.style.fontWeight = 'bold';
       if (input.parentNode) {
         input.parentNode.replaceChild(span, input);
       }
@@ -73,7 +75,7 @@ export default function Home() {
   };
 
   useEffect(() => {
-    handleExport(false);
+    handleExport(false, divRef);
   }, []);
 
   function updateTextColor(event: React.ChangeEvent<HTMLInputElement>): void {
@@ -132,21 +134,24 @@ export default function Home() {
           <div className={styles['tier-controls']}>
             <h3>Column 1 Size</h3>
             <input type="range" min="3" max="5" value={columnOneScale} onChange={(event) => setColumnOneScale(Number(event.target.value))} />
+            <button className={styles.export} onClick={() => handleExport(true, colOneRef)}>Export Column</button>
           </div>
           <div className={styles['tier-controls']}>
             <h3>Column 2 Size</h3>
             <input type="range" min="3" max="5" value={columnTwoScale} onChange={(event) => setColumnTwoScale(Number(event.target.value))} />
+            <button className={styles.export} onClick={() => handleExport(true, colTwoRef)}>Export Column</button>
           </div>
           <div className={styles['tier-controls']}>
             <h3>Column 3 Size</h3>
             <input type="range" min="3" max="5" value={columnThreeScale} onChange={(event) => setColumnThreeScale(Number(event.target.value))} />
+            <button className={styles.export} onClick={() => handleExport(true, colThreeRef)}>Export Column</button>
           </div>
           <div className={styles.controls}></div>
         </div>
 
         <div className={styles.content}>
           <div className={styles.trees} ref={divRef}>
-            <div className={styles.treehome}>
+            <div className={styles.treehome} ref={colOneRef}>
               <svg style={{ position: 'absolute', left: 0, top: 0 }}>
                 <defs>
                   <radialGradient id="myGradient">
@@ -164,7 +169,7 @@ export default function Home() {
 
             </div>
 
-            <div className={styles.treehome}>
+            <div className={styles.treehome} ref={colTwoRef}>
               <svg style={{ position: 'absolute', left: 0, top: 0 }}>
                 <defs>
                   <radialGradient id="myGradient">
@@ -182,7 +187,7 @@ export default function Home() {
 
             </div>
 
-            <div className={styles.treehome}>
+            <div className={styles.treehome} ref={colThreeRef}>
               <svg style={{ position: 'absolute', left: 0, top: 0 }}>
                 <defs>
                   <radialGradient id="myGradient">
@@ -234,7 +239,7 @@ export default function Home() {
             </div>
             <hr />
             <div className={styles['control-label']}>
-              <button className={styles.control} onClick={() => handleExport(true)}>Export Image</button>
+              <button className={styles.control} onClick={() => handleExport(true, divRef)}>Export Image</button>
             </div>
           </div>
         </div>
