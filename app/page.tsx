@@ -8,9 +8,10 @@ import domtoimage from 'dom-to-image-more';
 export default function Home() {
   const divRef = useRef<HTMLDivElement>(null);
 
+  // This state variable is used for the scale of the tree
   const [scale, setScale] = useState(3);
 
-  // Add state variables for gradient colors
+  // These state variables are used for the gradient colors
   const [color1, setColor1] = useState('#474747');
   const [color2, setColor2] = useState('#555555');
 
@@ -140,6 +141,7 @@ export default function Home() {
               </radialGradient>
             </defs>
           </svg>
+          
           <ParentChevron scale={scale}/>
           <Chevron position={2} scale={scale}/>
           <Chevron position={3} scale={scale}/>
@@ -160,6 +162,8 @@ export default function Home() {
             <label htmlFor="point-shadow">Point Number Shadow Color</label>
             <input id="point-shadow" name="point-shadow" type="color" onChange={updateShadowColor} />
           </div>
+          <hr/>
+          <h3>Changing these settings<br/> overrides individual changes</h3>
           <div className={styles['control-label']}>
             <label htmlFor="inner-gradient">Inner Gradient</label>
             <input id="inner-gradient" name="inner-gradient" type="color" onChange={updateColorOne} />
@@ -176,6 +180,7 @@ export default function Home() {
             <label htmlFor="outer-position">Outer Gradient Position</label>
             <input id="outer-position" name="outer-position" type="number" onChange={updateStopTwo} placeholder="95"/>
           </div>
+          <hr/>
           <div className={styles['control-label']}>
             <button className={styles.control} onClick={() => handleExport(true)}>Export Image</button>
           </div>

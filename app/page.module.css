@@ -64,6 +64,7 @@
   align-content: center;
   justify-content: center;
   gap: 16px;
+  z-index: 2000;
 }
 
 .control {

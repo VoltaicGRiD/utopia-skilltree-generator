@@ -1,0 +1,21 @@
+
+.context-menu {
+  position: fixed;
+  left: 0;
+  width: 200px;
+  height: auto;
+  padding: 0.5em;
+  border: 1px solid white;
+  background-color: rgb(50, 50, 50);
+  top: 0;
+  z-index: 9999;
+}
+
+.control-label {
+  font-size: 0.8em;
+  width: 100%;
+}
+
+  .control-label input {
+    width: 100%;
+  }
