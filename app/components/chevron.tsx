@@ -18,6 +18,8 @@ export function Chevron({ position, scale }: ChevronProps) {
   const [stop1, setStop1] = useState(0);
   const [stop2, setStop2] = useState(100);
 
+  const [descriptionTop, setDescriptionTop] = useState(46);
+
   function updateTextSize(event: React.ChangeEvent<HTMLInputElement>): void {
     const newSize = Number(event.target.value);
     setTextSize(newSize);
@@ -54,6 +56,11 @@ export function Chevron({ position, scale }: ChevronProps) {
   let display = 'block';
   if ((position) > scale) {
     display = 'none';
+  }
+
+  function updateDescriptionTop(event: React.ChangeEvent<HTMLInputElement>): void {
+    const newTop = Number(event.target.value);
+    setDescriptionTop(newTop);
   }
 
   function updateColorOne(event: React.ChangeEvent<HTMLInputElement>): void {
@@ -111,7 +118,7 @@ export function Chevron({ position, scale }: ChevronProps) {
       <div className={styles['chevron-controls']}>
         <textarea className={styles.title}></textarea>
         <img src="points.png" alt="points" className={styles['points-img']} style={{bottom: imageBottom, height: 104}} />
-        <textarea className={styles.skillbody} style={{fontSize: `${textSize}em`}}></textarea>
+        <textarea className={styles.skillbody} style={{fontSize: `${textSize}em`, top: `${descriptionTop}%`}}></textarea>
         <input className={styles.body} type="number" maxLength={1} min="0" max="9" defaultValue="0" style={{bottom: bodySoulBottom}}/>
         <input className={styles.mind} type="number" maxLength={1} min="0" max="9" defaultValue="0" style={{bottom: mindBottom}}/>
         <input className={styles.soul} type="number" maxLength={1} min="0" max="9" defaultValue="0" style={{bottom: bodySoulBottom}}/>
@@ -120,7 +127,11 @@ export function Chevron({ position, scale }: ChevronProps) {
       <div className={styles['chevron-extras']} style={{display: showMenu ? "flex" : "none", top: marginTop}}>
         <div className={styles['control-label']}>
           <label htmlFor="text-size">Font Size: {textSize}em (Default: 0.72em)</label>
-          <input id="text-size" name="text-size" step={0.01} min={0.5} max={2} type="range" onChange={updateTextSize} />
+          <input id="text-size" name="text-size" step={0.01} min={0.3} max={2} type="range" onChange={updateTextSize} />
+        </div>
+        <div className={styles['control-label']}>
+          <label htmlFor={`description-top-${position}`}>Description Position: {descriptionTop}% (Default: 46%)</label>
+          <input id={`description-top-${position}`} name={`description-top-${position}`} step={0.1} min={0} max={100} type="range" onChange={updateDescriptionTop}/>
         </div>
         <div className={styles['control-label']}>
           <label htmlFor={`inner-gradient-${position}`}>Inner Gradient</label>
@@ -161,6 +172,8 @@ export function ParentChevron({ scale }: ParentChevronProps) {
   const [stop1, setStop1] = useState(0);
   const [stop2, setStop2] = useState(100);
 
+  const [descriptionTop, setDescriptionTop] = useState(46);
+
   function updateTextSize(event: React.ChangeEvent<HTMLInputElement>): void {
     const newSize = Number(event.target.value);
     setTextSize(newSize);
@@ -189,6 +202,11 @@ export function ParentChevron({ scale }: ParentChevronProps) {
       bodySoulBottom = -6;
       mindBottom = -12;
       break;
+  }
+
+  function updateDescriptionTop(event: React.ChangeEvent<HTMLInputElement>): void {
+    const newTop = Number(event.target.value);
+    setDescriptionTop(newTop);
   }
 
   function updateColorOne(event: React.ChangeEvent<HTMLInputElement>): void {
@@ -247,7 +265,7 @@ export function ParentChevron({ scale }: ParentChevronProps) {
       <div className={styles['parent-chevron-controls']}>
         <textarea className={styles.title} placeholder='Epic Talent' ></textarea>
         <img src="points.png" alt="points" className={styles['points-img']} style={{bottom: imageBottom, height: 104}} />
-        <textarea className={styles.skillbody} style={{fontSize: `${textSize}em`}} placeholder="Some awesome, incredible, homebrew'd talent" ></textarea>
+        <textarea className={styles.skillbody} style={{fontSize: `${textSize}em`, top: `${descriptionTop}%`}} placeholder="Some awesome, incredible, homebrew'd talent" ></textarea>
         <input className={styles.body} type="number" maxLength={1} min="0" max="9" defaultValue="0" style={{ bottom: bodySoulBottom}}/>
         <input className={styles.mind} type="number" maxLength={1} min="0" max="9" defaultValue="0" style={{ bottom: mindBottom}}/>
         <input className={styles.soul} type="number" maxLength={1} min="0" max="9" defaultValue="0" style={{ bottom: bodySoulBottom}}/>
@@ -256,7 +274,11 @@ export function ParentChevron({ scale }: ParentChevronProps) {
       <div className={styles['chevron-extras']} style={{display: showMenu ? "flex" : "none"}}>
         <div className={styles['control-label']}>
           <label htmlFor="text-size">Font Size: {textSize}em (Default: 0.72em)</label>
-          <input id="text-size" name="text-size" step={0.01} min={0.5} max={2} type="range" onChange={updateTextSize} />
+          <input id="text-size" name="text-size" step={0.01} min={0.3} max={2} type="range" onChange={updateTextSize} />
+        </div>
+        <div className={styles['control-label']}>
+          <label htmlFor="description-top-parent">Description Position: {descriptionTop}% (Default: 46%)</label>
+          <input id="description-top-parent" name="description-top-parent" step={0.1} min={0} max={100} type="range" onChange={updateDescriptionTop}/>
         </div>
         <div className={styles['control-label']}>
           <label htmlFor="inner-gradient-parent">Inner Gradient</label>
