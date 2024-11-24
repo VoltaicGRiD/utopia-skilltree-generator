@@ -4,9 +4,10 @@ import styles from './chevron.module.css';
 interface ChevronProps {
   position: number;
   scale: number;
+  column: number;
 }
 
-export function Chevron({ position, scale }: ChevronProps) {
+export function Chevron({ position, scale, column }: ChevronProps) {
   const [textSize, setTextSize] = useState(0.88);
   const [showMenu, setShowMenu] = useState(false);
 
@@ -23,8 +24,6 @@ export function Chevron({ position, scale }: ChevronProps) {
   function updateTextSize(event: React.ChangeEvent<HTMLInputElement>): void {
     const newSize = Number(event.target.value);
     setTextSize(newSize);
-    const root = document.querySelector(':root') as HTMLElement;
-    root.style.setProperty('--text-size', `${textSize}rem`);
   }
   
   const marginTop = -30;
@@ -64,25 +63,25 @@ export function Chevron({ position, scale }: ChevronProps) {
   }
 
   function updateColorOne(event: React.ChangeEvent<HTMLInputElement>): void {
-    setFill(`url(#myGradient-${position})`);
+    setFill(`url(#myGradient-${position}-${column})`);
     const newColor = event.target.value;
     setColor1(newColor);
   }
 
   function updateStopOne(event: React.ChangeEvent<HTMLInputElement>): void {
-    setFill(`url(#myGradient-${position})`);
+    setFill(`url(#myGradient-${position}-${column})`);
     const newStop = Number(event.target.value);
     setStop1(newStop);
   }
 
   function updateColorTwo(event: React.ChangeEvent<HTMLInputElement>): void {
-    setFill(`url(#myGradient-${position})`);
+    setFill(`url(#myGradient-${position}-${column})`);
     const newColor = event.target.value;
     setColor2(newColor);
   }
 
   function updateStopTwo(event: React.ChangeEvent<HTMLInputElement>): void {
-    setFill(`url(#myGradient-${position})`);
+    setFill(`url(#myGradient-${position}-${column})`);
     const newStop = Number(event.target.value);
     setStop2(newStop);
   }
@@ -92,12 +91,12 @@ export function Chevron({ position, scale }: ChevronProps) {
   }
 
   useEffect(() => {
-    document.querySelector(`#text-size-${position}`)?.setAttribute('value', textSize.toString());
-    document.querySelector(`#description-top-${position}`)?.setAttribute('value', descriptionTop.toString());
-    document.querySelector(`#inner-gradient-${position}`)?.setAttribute('value', color1);
-    document.querySelector(`#outer-gradient-${position}`)?.setAttribute('value', color2);
-    document.querySelector(`#inner-position-${position}`)?.setAttribute('value', stop1.toString());
-    document.querySelector(`#outer-position-${position}`)?.setAttribute('value', stop2.toString());
+    document.querySelector(`#text-size-${position}-${column}`)?.setAttribute('value', textSize.toString());
+    document.querySelector(`#description-top-${position}-${column}`)?.setAttribute('value', descriptionTop.toString());
+    document.querySelector(`#inner-gradient-${position}-${column}`)?.setAttribute('value', color1);
+    document.querySelector(`#outer-gradient-${position}-${column}`)?.setAttribute('value', color2);
+    document.querySelector(`#inner-position-${position}-${column}`)?.setAttribute('value', stop1.toString());
+    document.querySelector(`#outer-position-${position}-${column}`)?.setAttribute('value', stop2.toString());
   }, []);
 
   return (
@@ -106,7 +105,7 @@ export function Chevron({ position, scale }: ChevronProps) {
       <div className={styles['chevron-svg']} style={{marginTop: `${marginTop}px`, height: `${height}px`, zIndex: zIndex}}>
         <svg className={styles.chevron} id="chevron" viewBox="0 0 159 169" preserveAspectRatio='none'>
           <defs>
-            <radialGradient className='radial' id={`myGradient-${position}`}>
+            <radialGradient className='radial' id={`myGradient-${position}-${column}`}>
               <stop className="chevron-radial-1" offset={`${stop1}%`} stopColor={color1} />
               <stop className="chevron-radial-2" offset={`${stop2}%`} stopColor={color2} />
             </radialGradient>
@@ -126,32 +125,32 @@ export function Chevron({ position, scale }: ChevronProps) {
       <div className={styles['chevron-extras']} style={{display: showMenu ? "flex" : "none", top: `${marginTop} - 20px`}}>
         <div className={styles['control-group']}>
           <div className={styles['control-label']}>
-            <label htmlFor={`text-size-${position}`}>Font size: {textSize} [0.88]</label>
-            <input id={`text-size-${position}`} name={`text-size-${position}`} step={0.01} min={0.3} max={2} placeholder='0.88' type="number" onChange={updateTextSize} />
+            <label htmlFor={`text-size-${position}-${column}`}>Font size: {textSize} [0.88]</label>
+            <input id={`text-size-${position}-${column}`} name={`text-size-${position}-${column}`} step={0.01} min={0.3} max={2} placeholder='0.88' type="number" onChange={updateTextSize} />
           </div>
           <div className={styles['control-label']}>
-            <label htmlFor={`description-top-${position}`}>Height: {descriptionTop}% [50%]</label>
-            <input id={`description-top-${position}`} name={`description-top-${position}`} step={0.1} min={0} max={100} type="number" onChange={updateDescriptionTop}/>
-          </div>
-        </div>
-        <div className={styles['control-group']}>
-          <div className={styles['control-label']}>
-            <label htmlFor={`inner-gradient-${position}`}>Inner gradient color</label>
-            <input id={`inner-gradient-${position}`} name={`inner-gradient-${position}`} type="color" onChange={updateColorOne} />
-          </div>
-          <div className={styles['control-label']}>
-            <label htmlFor={`inner-position-${position}`}>and position</label>
-            <input id={`inner-position-${position}`} name={`inner-position-${position}`} type="number" onChange={updateStopOne} placeholder="10"/>
+            <label htmlFor={`description-top-${position}-${column}`}>Height: {descriptionTop}% [50%]</label>
+            <input id={`description-top-${position}-${column}`} name={`description-top-${position}-${column}`} step={0.1} min={0} max={100} type="number" onChange={updateDescriptionTop}/>
           </div>
         </div>
         <div className={styles['control-group']}>
           <div className={styles['control-label']}>
-            <label htmlFor={`outer-gradient-${position}`}>Outer gradient color</label>
-            <input id={`outer-gradient-${position}`} name={`outer-gradient-${position}`} type="color" onChange={updateColorTwo}/>
+            <label htmlFor={`inner-gradient-${position}-${column}`}>Inner gradient color</label>
+            <input id={`inner-gradient-${position}-${column}`} name={`inner-gradient-${position}-${column}`} type="color" onChange={updateColorOne} />
           </div>
           <div className={styles['control-label']}>
-            <label htmlFor={`outer-position-${position}`}>and position</label>
-            <input id={`outer-position-${position}`} name={`outer-position-${position}`} type="number" onChange={updateStopTwo} placeholder="95"/>
+            <label htmlFor={`inner-position-${position}-${column}`}>and position</label>
+            <input id={`inner-position-${position}-${column}`} name={`inner-position-${position}-${column}`} type="number" onChange={updateStopOne} placeholder="10"/>
+          </div>
+        </div>
+        <div className={styles['control-group']}>
+          <div className={styles['control-label']}>
+            <label htmlFor={`outer-gradient-${position}-${column}`}>Outer gradient color</label>
+            <input id={`outer-gradient-${position}-${column}`} name={`outer-gradient-${position}-${column}`} type="color" onChange={updateColorTwo}/>
+          </div>
+          <div className={styles['control-label']}>
+            <label htmlFor={`outer-position-${position}-${column}`}>and position</label>
+            <input id={`outer-position-${position}-${column}`} name={`outer-position-${position}-${column}`} type="number" onChange={updateStopTwo} placeholder="95"/>
           </div>
         </div>
         <button onClick={reset}>Reset Gradients</button>
@@ -163,9 +162,10 @@ export function Chevron({ position, scale }: ChevronProps) {
 
 interface ParentChevronProps {
   scale: number;
+  column: number;
 }
 
-export function ParentChevron({ scale }: ParentChevronProps) {
+export function ParentChevron({ scale, column }: ParentChevronProps) {
   const [textSize, setTextSize] = useState(0.88);
   const [showMenu, setShowMenu] = useState(false);
 
@@ -182,8 +182,6 @@ export function ParentChevron({ scale }: ParentChevronProps) {
   function updateTextSize(event: React.ChangeEvent<HTMLInputElement>): void {
     const newSize = Number(event.target.value);
     setTextSize(newSize);
-    const root = document.querySelector(':root') as HTMLElement;
-    root.style.setProperty('--text-size', `${textSize}rem`);
   }
 
   const height = (660 + (26 * scale)) / scale;
@@ -215,25 +213,25 @@ export function ParentChevron({ scale }: ParentChevronProps) {
   }
 
   function updateColorOne(event: React.ChangeEvent<HTMLInputElement>): void {
-    setFill(`url(#myGradient-parent)`);
+    setFill(`url(#myGradient-parent-${column})`);
     const newColor = event.target.value;
     setColor1(newColor);
   }
 
   function updateStopOne(event: React.ChangeEvent<HTMLInputElement>): void {
-    setFill(`url(#myGradient-parent)`);
+    setFill(`url(#myGradient-parent-${column})`);
     const newStop = Number(event.target.value);
     setStop1(newStop);
   }
 
   function updateColorTwo(event: React.ChangeEvent<HTMLInputElement>): void {
-    setFill(`url(#myGradient-parent)`);
+    setFill(`url(#myGradient-parent-${column})`);
     const newColor = event.target.value;
     setColor2(newColor);
   }
 
   function updateStopTwo(event: React.ChangeEvent<HTMLInputElement>): void {
-    setFill(`url(#myGradient-parent)`);
+    setFill(`url(#myGradient-parent-${column})`);
     const newStop = Number(event.target.value);
     setStop2(newStop);
   }
@@ -243,12 +241,12 @@ export function ParentChevron({ scale }: ParentChevronProps) {
   }
 
   useEffect(() => {
-    document.querySelector(`#text-size-parent`)?.setAttribute('value', textSize.toString());
-    document.querySelector(`#description-top-parent`)?.setAttribute('value', descriptionTop.toString());
-    document.querySelector(`#inner-gradient-parent`)?.setAttribute('value', color1);
-    document.querySelector(`#outer-gradient-parent`)?.setAttribute('value', color2);
-    document.querySelector(`#inner-position-parent`)?.setAttribute('value', stop1.toString());
-    document.querySelector(`#outer-position-parent`)?.setAttribute('value', stop2.toString());
+    document.querySelector(`#text-size-parent-${column}`)?.setAttribute('value', textSize.toString());
+    document.querySelector(`#description-top-parent-${column}`)?.setAttribute('value', descriptionTop.toString());
+    document.querySelector(`#inner-gradient-parent-${column}`)?.setAttribute('value', color1);
+    document.querySelector(`#outer-gradient-parent-${column}`)?.setAttribute('value', color2);
+    document.querySelector(`#inner-position-parent-${column}`)?.setAttribute('value', stop1.toString());
+    document.querySelector(`#outer-position-parent-${column}`)?.setAttribute('value', stop2.toString());
   }, []);
 
 
@@ -258,7 +256,7 @@ export function ParentChevron({ scale }: ParentChevronProps) {
       <div className={styles['chevron-svg']} style={{height: `${height}px`, zIndex: 100}}>
         <svg className={styles.chevron} id="chevron" viewBox="0 0 159 169" preserveAspectRatio='none'>
           <defs>
-            <radialGradient className='radial' id={`myGradient-parent`}>
+            <radialGradient className='radial' id={`myGradient-parent-${column}`}>
               <stop className="chevron-radial-1" offset={`${stop1}%`} stopColor={color1} />
               <stop className="chevron-radial-2" offset={`${stop2}%`} stopColor={color2} />
             </radialGradient>
@@ -278,32 +276,32 @@ export function ParentChevron({ scale }: ParentChevronProps) {
       <div className={styles['chevron-extras']} style={{display: showMenu ? "flex" : "none"}}>
         <div className={styles['control-group']}>
           <div className={styles['control-label']}>
-            <label htmlFor={`text-size-parent`}>Font size: {textSize} [0.88]</label>
-            <input id={`text-size-parent`} name={`text-size-parent`} step={0.01} min={0.3} max={2} placeholder='0.88' type="number" onChange={updateTextSize} />
+            <label htmlFor={`text-size-parent-${column}`}>Font size: {textSize} [0.88]</label>
+            <input id={`text-size-parent-${column}`} name={`text-size-parent-${column}`} step={0.01} min={0.3} max={2} placeholder='0.88' type="number" onChange={updateTextSize} />
           </div>
           <div className={styles['control-label']}>
-            <label htmlFor={`description-top-parent`}>Height: {descriptionTop}% [50%]</label>
-            <input id={`description-top-parent`} name={`description-top-parent`} step={0.1} min={0} max={100} type="number" onChange={updateDescriptionTop}/>
-          </div>
-        </div>
-        <div className={styles['control-group']}>
-          <div className={styles['control-label']}>
-            <label htmlFor={`inner-gradient-parent`}>Inner gradient color</label>
-            <input id={`inner-gradient-parent`} name={`inner-gradient-parent`} type="color" onChange={updateColorOne} />
-          </div>
-          <div className={styles['control-label']}>
-            <label htmlFor={`inner-position-parent`}>and position</label>
-            <input id={`inner-position-parent`} name={`inner-position-parent`} type="number" onChange={updateStopOne} placeholder="10"/>
+            <label htmlFor={`description-top-parent-${column}`}>Height: {descriptionTop}% [50%]</label>
+            <input id={`description-top-parent-${column}`} name={`description-top-parent-${column}`} step={0.1} min={0} max={100} type="number" onChange={updateDescriptionTop}/>
           </div>
         </div>
         <div className={styles['control-group']}>
           <div className={styles['control-label']}>
-            <label htmlFor={`outer-gradient-parent`}>Outer gradient color</label>
-            <input id={`outer-gradient-parent`} name={`outer-gradient-parent`} type="color" onChange={updateColorTwo}/>
+            <label htmlFor={`inner-gradient-parent-${column}`}>Inner gradient color</label>
+            <input id={`inner-gradient-parent-${column}`} name={`inner-gradient-parent-${column}`} type="color" onChange={updateColorOne} />
           </div>
           <div className={styles['control-label']}>
-            <label htmlFor={`outer-position-parent`}>and position</label>
-            <input id={`outer-position-parent`} name={`outer-position-parent`} type="number" onChange={updateStopTwo} placeholder="95"/>
+            <label htmlFor={`inner-position-parent-${column}`}>and position</label>
+            <input id={`inner-position-parent-${column}`} name={`inner-position-parent-${column}`} type="number" onChange={updateStopOne} placeholder="10"/>
+          </div>
+        </div>
+        <div className={styles['control-group']}>
+          <div className={styles['control-label']}>
+            <label htmlFor={`outer-gradient-parent-${column}`}>Outer gradient color</label>
+            <input id={`outer-gradient-parent-${column}`} name={`outer-gradient-parent-${column}`} type="color" onChange={updateColorTwo}/>
+          </div>
+          <div className={styles['control-label']}>
+            <label htmlFor={`outer-position-parent-${column}`}>and position</label>
+            <input id={`outer-position-parent-${column}`} name={`outer-position-parent-${column}`} type="number" onChange={updateStopTwo} placeholder="95"/>
           </div>
         </div>
         <button onClick={reset}>Reset Gradients</button>

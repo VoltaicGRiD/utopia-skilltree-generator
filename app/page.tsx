@@ -161,11 +161,11 @@ export default function Home() {
                 </defs>
               </svg>
 
-              <ParentChevron scale={columnOneScale} />
-              <Chevron position={2} scale={columnOneScale} />
-              <Chevron position={3} scale={columnOneScale} />
-              <Chevron position={4} scale={columnOneScale} />
-              <Chevron position={5} scale={columnOneScale} />
+              <ParentChevron scale={columnOneScale} column={1}/>
+              <Chevron position={2} scale={columnOneScale} column={1}/>
+              <Chevron position={3} scale={columnOneScale} column={1}/>
+              <Chevron position={4} scale={columnOneScale} column={1}/>
+              <Chevron position={5} scale={columnOneScale} column={1}/>
 
             </div>
 
@@ -179,11 +179,11 @@ export default function Home() {
                 </defs>
               </svg>
 
-              <ParentChevron scale={columnTwoScale} />
-              <Chevron position={2} scale={columnTwoScale} />
-              <Chevron position={3} scale={columnTwoScale} />
-              <Chevron position={4} scale={columnTwoScale} />
-              <Chevron position={5} scale={columnTwoScale} />
+              <ParentChevron scale={columnTwoScale} column={2}/>
+              <Chevron position={2} scale={columnTwoScale} column={2}/>
+              <Chevron position={3} scale={columnTwoScale} column={2}/>
+              <Chevron position={4} scale={columnTwoScale} column={2}/>
+              <Chevron position={5} scale={columnTwoScale} column={2}/>
 
             </div>
 
@@ -197,11 +197,11 @@ export default function Home() {
                 </defs>
               </svg>
 
-              <ParentChevron scale={columnThreeScale} />
-              <Chevron position={2} scale={columnThreeScale} />
-              <Chevron position={3} scale={columnThreeScale} />
-              <Chevron position={4} scale={columnThreeScale} />
-              <Chevron position={5} scale={columnThreeScale} />
+              <ParentChevron scale={columnThreeScale} column={3}/>
+              <Chevron position={2} scale={columnThreeScale} column={3}/>
+              <Chevron position={3} scale={columnThreeScale} column={3}/>
+              <Chevron position={4} scale={columnThreeScale} column={3}/>
+              <Chevron position={5} scale={columnThreeScale} column={3}/>
 
             </div>
           </div>
