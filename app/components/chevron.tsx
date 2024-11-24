@@ -124,7 +124,7 @@ export function Chevron({ position, scale }: ChevronProps) {
         <input className={styles.soul} type="number" maxLength={1} min="0" max="9" defaultValue="0" style={{bottom: bodySoulBottom}}/>
       </div>
 
-      <div className={styles['chevron-extras']} style={{display: showMenu ? "flex" : "none", top: marginTop}}>
+      <div className={styles['chevron-extras']} style={{display: showMenu ? "flex" : "none", top: marginTop - 20}}>
         <div className={styles['control-label']}>
           <label htmlFor="text-size">Font Size: {textSize}em (Default: 0.72em)</label>
           <input id="text-size" name="text-size" step={0.01} min={0.3} max={2} type="range" onChange={updateTextSize} />

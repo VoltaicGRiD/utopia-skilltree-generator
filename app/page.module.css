@@ -49,6 +49,45 @@
 
 .main {
   display: flex;
+  flex-direction: column;
+  grid-row-start: 2;
+  position: relative;
+  align-content: center;
+  justify-content: center;
+  gap: 16px;
+  overflow: none;
+}
+
+.content {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  align-content: center;
+  justify-content: center;
+  gap: 16px;
+}
+
+.control-row {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  justify-content: center;
+  gap: 16px;
+}
+
+.tier-controls {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  gap: 2;
+  z-index: 2000;
+  text-align: center;
+  width: 200px;
+}
+
+.trees {
+  display: flex;
   flex-direction: row;
   grid-row-start: 2;
   position: relative;
@@ -65,6 +104,7 @@
   justify-content: center;
   gap: 16px;
   z-index: 2000;
+  width: 300px;
 }
 
 .control {
