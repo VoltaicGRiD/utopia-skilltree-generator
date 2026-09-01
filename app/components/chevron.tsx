@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import styles from './chevron.module.css';
+import { ColorInput } from './colorinput';
 
 interface ChevronProps {
   position: number;
@@ -62,9 +63,8 @@ export function Chevron({ position, scale, column }: ChevronProps) {
     setDescriptionTop(newTop);
   }
 
-  function updateColorOne(event: React.ChangeEvent<HTMLInputElement>): void {
+  function updateColorOne(newColor: string): void {
     setFill(`url(#myGradient-${position}-${column})`);
-    const newColor = event.target.value;
     setColor1(newColor);
   }
 
@@ -74,9 +74,8 @@ export function Chevron({ position, scale, column }: ChevronProps) {
     setStop1(newStop);
   }
 
-  function updateColorTwo(event: React.ChangeEvent<HTMLInputElement>): void {
+  function updateColorTwo(newColor: string): void {
     setFill(`url(#myGradient-${position}-${column})`);
-    const newColor = event.target.value;
     setColor2(newColor);
   }
 
@@ -93,8 +92,6 @@ export function Chevron({ position, scale, column }: ChevronProps) {
   useEffect(() => {
     document.querySelector(`#text-size-${position}-${column}`)?.setAttribute('value', textSize.toString());
     document.querySelector(`#description-top-${position}-${column}`)?.setAttribute('value', descriptionTop.toString());
-    document.querySelector(`#inner-gradient-${position}-${column}`)?.setAttribute('value', color1);
-    document.querySelector(`#outer-gradient-${position}-${column}`)?.setAttribute('value', color2);
     document.querySelector(`#inner-position-${position}-${column}`)?.setAttribute('value', stop1.toString());
     document.querySelector(`#outer-position-${position}-${column}`)?.setAttribute('value', stop2.toString());
   }, []);
@@ -136,7 +133,7 @@ export function Chevron({ position, scale, column }: ChevronProps) {
         <div className={styles['control-group']}>
           <div className={styles['control-label']}>
             <label htmlFor={`inner-gradient-${position}-${column}`}>Inner gradient color</label>
-            <input id={`inner-gradient-${position}-${column}`} name={`inner-gradient-${position}-${column}`} type="color" onChange={updateColorOne} />
+            <ColorInput id={`inner-gradient-${position}-${column}`} value={color1} onChange={updateColorOne} />
           </div>
           <div className={styles['control-label']}>
             <label htmlFor={`inner-position-${position}-${column}`}>and position</label>
@@ -146,7 +143,7 @@ export function Chevron({ position, scale, column }: ChevronProps) {
         <div className={styles['control-group']}>
           <div className={styles['control-label']}>
             <label htmlFor={`outer-gradient-${position}-${column}`}>Outer gradient color</label>
-            <input id={`outer-gradient-${position}-${column}`} name={`outer-gradient-${position}-${column}`} type="color" onChange={updateColorTwo}/>
+            <ColorInput id={`outer-gradient-${position}-${column}`} value={color2} onChange={updateColorTwo} />
           </div>
           <div className={styles['control-label']}>
             <label htmlFor={`outer-position-${position}-${column}`}>and position</label>
@@ -212,9 +209,8 @@ export function ParentChevron({ scale, column }: ParentChevronProps) {
     setDescriptionTop(newTop);
   }
 
-  function updateColorOne(event: React.ChangeEvent<HTMLInputElement>): void {
+  function updateColorOne(newColor: string): void {
     setFill(`url(#myGradient-parent-${column})`);
-    const newColor = event.target.value;
     setColor1(newColor);
   }
 
@@ -224,9 +220,8 @@ export function ParentChevron({ scale, column }: ParentChevronProps) {
     setStop1(newStop);
   }
 
-  function updateColorTwo(event: React.ChangeEvent<HTMLInputElement>): void {
+  function updateColorTwo(newColor: string): void {
     setFill(`url(#myGradient-parent-${column})`);
-    const newColor = event.target.value;
     setColor2(newColor);
   }
 
@@ -243,8 +238,6 @@ export function ParentChevron({ scale, column }: ParentChevronProps) {
   useEffect(() => {
     document.querySelector(`#text-size-parent-${column}`)?.setAttribute('value', textSize.toString());
     document.querySelector(`#description-top-parent-${column}`)?.setAttribute('value', descriptionTop.toString());
-    document.querySelector(`#inner-gradient-parent-${column}`)?.setAttribute('value', color1);
-    document.querySelector(`#outer-gradient-parent-${column}`)?.setAttribute('value', color2);
     document.querySelector(`#inner-position-parent-${column}`)?.setAttribute('value', stop1.toString());
     document.querySelector(`#outer-position-parent-${column}`)?.setAttribute('value', stop2.toString());
   }, []);
@@ -287,7 +280,7 @@ export function ParentChevron({ scale, column }: ParentChevronProps) {
         <div className={styles['control-group']}>
           <div className={styles['control-label']}>
             <label htmlFor={`inner-gradient-parent-${column}`}>Inner gradient color</label>
-            <input id={`inner-gradient-parent-${column}`} name={`inner-gradient-parent-${column}`} type="color" onChange={updateColorOne} />
+            <ColorInput id={`inner-gradient-parent-${column}`} value={color1} onChange={updateColorOne} />
           </div>
           <div className={styles['control-label']}>
             <label htmlFor={`inner-position-parent-${column}`}>and position</label>
@@ -297,7 +290,7 @@ export function ParentChevron({ scale, column }: ParentChevronProps) {
         <div className={styles['control-group']}>
           <div className={styles['control-label']}>
             <label htmlFor={`outer-gradient-parent-${column}`}>Outer gradient color</label>
-            <input id={`outer-gradient-parent-${column}`} name={`outer-gradient-parent-${column}`} type="color" onChange={updateColorTwo}/>
+            <ColorInput id={`outer-gradient-parent-${column}`} value={color2} onChange={updateColorTwo} />
           </div>
           <div className={styles['control-label']}>
             <label htmlFor={`outer-position-parent-${column}`}>and position</label>

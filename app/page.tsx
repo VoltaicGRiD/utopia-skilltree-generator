@@ -2,6 +2,7 @@
 
 import styles from "./page.module.css";
 import { ParentChevron, Chevron } from "./components/chevron";
+import { ColorInput } from "./components/colorinput";
 import { useState, useRef, useEffect, RefObject } from "react";
 import domtoimage from 'dom-to-image-more';
 
@@ -21,9 +22,9 @@ export default function Home() {
   const [color2, setColor2] = useState('#555555');
 
   // Add state variables for text colors
-  const [textColor] = useState('#ffffff');
-  const [pointColor] = useState('#ffffff');
-  const [shadowColor] = useState('#000000');
+  const [textColor, setTextColor] = useState('#ffffff');
+  const [pointColor, setPointColor] = useState('#ffffff');
+  const [shadowColor, setShadowColor] = useState('#000000');
 
   // Add state variables for gradient stops
   const [stop1, setStop1] = useState(0);
@@ -78,26 +79,25 @@ export default function Home() {
     handleExport(false, divRef);
   }, []);
 
-  function updateTextColor(event: React.ChangeEvent<HTMLInputElement>): void {
-    const newColor = event.target.value;
+  function updateTextColor(newColor: string): void {
+    setTextColor(newColor);
     const root = document.querySelector(':root') as HTMLElement;
     root.style.setProperty('--text-color', newColor);
   }
 
-  function updatePointColor(event: React.ChangeEvent<HTMLInputElement>): void {
-    const newColor = event.target.value;
+  function updatePointColor(newColor: string): void {
+    setPointColor(newColor);
     const root = document.querySelector(':root') as HTMLElement;
     root.style.setProperty('--point-color', newColor);
   }
 
-  function updateShadowColor(event: React.ChangeEvent<HTMLInputElement>): void {
-    const newColor = event.target.value;
+  function updateShadowColor(newColor: string): void {
+    setShadowColor(newColor);
     const root = document.querySelector(':root') as HTMLElement;
     root.style.setProperty('--text-shadow', newColor);
   }
 
-  function updateColorOne(event: React.ChangeEvent<HTMLInputElement>): void {
-    const newColor = event.target.value;
+  function updateColorOne(newColor: string): void {
     setColor1(newColor);
   }
 
@@ -106,8 +106,7 @@ export default function Home() {
     setStop1(newStop);
   }
 
-  function updateColorTwo(event: React.ChangeEvent<HTMLInputElement>): void {
-    const newColor = event.target.value;
+  function updateColorTwo(newColor: string): void {
     setColor2(newColor);
   }
 
@@ -117,11 +116,6 @@ export default function Home() {
   }
 
   useEffect(() => {
-    document.querySelector('#text-color')?.setAttribute('value', textColor);
-    document.querySelector('#point-color')?.setAttribute('value', pointColor);
-    document.querySelector('#text-shadow-color')?.setAttribute('value', shadowColor);
-    document.querySelector('#inner-gradient')?.setAttribute('value', color1);
-    document.querySelector('#outer-gradient')?.setAttribute('value', color2);
     document.querySelector('#inner-position')?.setAttribute('value', stop1.toString());
     document.querySelector('#outer-position')?.setAttribute('value', stop2.toString());
   }, []);
@@ -209,21 +203,21 @@ export default function Home() {
           <div className={styles.controls}>
             <div className={styles['control-label']}>
               <label htmlFor="text-color">Text Color</label>
-              <input id="text-color" name="text-color" type="color" onChange={updateTextColor} />
+              <ColorInput id="text-color" value={textColor} onChange={updateTextColor} />
             </div>
             <div className={styles['control-label']}>
               <label htmlFor="point-color">Point Number Text Color</label>
-              <input id="point-color" name="point-color" type="color" onChange={updatePointColor} />
+              <ColorInput id="point-color" value={pointColor} onChange={updatePointColor} />
             </div>
             <div className={styles['control-label']}>
               <label htmlFor="point-shadow">Point Number Shadow Color</label>
-              <input id="point-shadow" name="point-shadow" type="color" onChange={updateShadowColor} />
+              <ColorInput id="point-shadow" value={shadowColor} onChange={updateShadowColor} />
             </div>
             <hr />
             <h3>Changing these settings<br /> overrides individual changes</h3>
             <div className={styles['control-label']}>
               <label htmlFor="inner-gradient">Inner Gradient</label>
-              <input id="inner-gradient" name="inner-gradient" type="color" onChange={updateColorOne} />
+              <ColorInput id="inner-gradient" value={color1} onChange={updateColorOne} />
             </div>
             <div className={styles['control-label']}>
               <label htmlFor="inner-position">Inner Gradient Position</label>
@@ -231,7 +225,7 @@ export default function Home() {
             </div>
             <div className={styles['control-label']}>
               <label htmlFor="outer-gradient">Outer Gradient</label>
-              <input id="outer-gradient" name="outer-gradient" type="color" onChange={updateColorTwo} />
+              <ColorInput id="outer-gradient" value={color2} onChange={updateColorTwo} />
             </div>
             <div className={styles['control-label']}>
               <label htmlFor="outer-position">Outer Gradient Position</label>
