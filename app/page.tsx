@@ -33,36 +33,29 @@ export default function Home() {
   const handleExport = async (file: boolean, ref: RefObject<HTMLDivElement>) => {
     const node = ref.current;
     if (!node) return;
-    const inputs = node.querySelectorAll('input');
-
-    // Replace inputs with spans
-    inputs.forEach((input) => {
-      const span = document.createElement('span');
-      span.textContent = input.value;
-      span.setAttribute('style', input.getAttribute('style') || '');
-      span.className = input.className;
-      span.style.webkitTextStroke = '1px white;';
-      if (input.parentNode) {
-        input.parentNode.replaceChild(span, input);
-      }
-    });
+    // Swap inputs for spans in the cloned copy only, so the live page is never touched.
+    // Mutating the real DOM here left spans behind (e.g. in the hover panels) when exports overlapped.
+    const options = {
+      scale: 5,
+      onclone: (clone: HTMLElement) => {
+        clone.querySelectorAll('input').forEach((input) => {
+          const span = document.createElement('span');
+          span.textContent = input.getAttribute('value') ?? '';
+          span.setAttribute('style', input.getAttribute('style') || '');
+          span.className = input.className;
+          input.replaceWith(span);
+        });
+      },
+    };
 
     // We discard this since the image needs to be processed twice to get the correct alignment of objects
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const _ = domtoimage.toPng(node, { scale: 5 }).then((dataUrl) => {
+    const _ = domtoimage.toPng(node, options).then((dataUrl) => {
       return;
     });
 
-    domtoimage.toPng(node, { scale: 5 })
+    domtoimage.toPng(node, options)
       .then((dataUrl) => {
-        // Revert spans back to inputs
-        const spans = node.querySelectorAll('span');
-        spans.forEach((span, index) => {
-          if (span.parentNode) {
-            span.parentNode.replaceChild(inputs[index], span);
-          }
-        });
-
         if (file) {
           const link = document.createElement('a');
           link.download = 'exported-image.png';
