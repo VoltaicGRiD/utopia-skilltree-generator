@@ -114,9 +114,9 @@ export function Chevron({ position, scale, column }: ChevronProps) {
         <textarea className={styles.title} style={{top: '2%'}}></textarea>
         <img src="points.png" alt="points" className={styles['points-img']} style={{bottom: imageBottom, height: 104}} />
         <textarea className={styles.skillbody} style={{fontSize: `${textSize}em`, top: `${descriptionTop}%`}}></textarea>
-        <input className={styles.body} type="number" maxLength={1} min="0" max="9" defaultValue="0" style={{bottom: bodySoulBottom}}/>
-        <input className={styles.mind} type="number" maxLength={1} min="0" max="9" defaultValue="0" style={{bottom: mindBottom}}/>
-        <input className={styles.soul} type="number" maxLength={1} min="0" max="9" defaultValue="0" style={{bottom: bodySoulBottom}}/>
+        <input className={styles.body} type="text" maxLength={1} min="0" max="9" defaultValue="0" style={{bottom: bodySoulBottom}}/>
+        <input className={styles.mind} type="text" maxLength={1} min="0" max="9" defaultValue="0" style={{bottom: mindBottom}}/>
+        <input className={styles.soul} type="text" maxLength={1} min="0" max="9" defaultValue="0" style={{bottom: bodySoulBottom}}/>
       </div>
 
       <div className={styles['chevron-extras']} style={{display: showMenu ? "flex" : "none", top: `${marginTop} - 20px`}}>
@@ -261,9 +261,9 @@ export function ParentChevron({ scale, column }: ParentChevronProps) {
         <textarea className={styles.title} placeholder='Epic Talent' ></textarea>
         <img src="points.png" alt="points" className={styles['points-img']} style={{bottom: imageBottom, height: 104}} />
         <textarea className={styles.skillbody} style={{fontSize: `${textSize}em`, top: `${descriptionTop}%`}} placeholder="Some awesome, incredible, homebrew'd talent" ></textarea>
-        <input className={styles.body} type="number" maxLength={1} min="0" max="9" defaultValue="0" style={{ bottom: bodySoulBottom}}/>
-        <input className={styles.mind} type="number" maxLength={1} min="0" max="9" defaultValue="0" style={{ bottom: mindBottom}}/>
-        <input className={styles.soul} type="number" maxLength={1} min="0" max="9" defaultValue="0" style={{ bottom: bodySoulBottom}}/>
+        <input className={styles.body} type="text" maxLength={1} min="0" max="9" defaultValue="0" style={{ bottom: bodySoulBottom}}/>
+        <input className={styles.mind} type="text" maxLength={1} min="0" max="9" defaultValue="0" style={{ bottom: mindBottom}}/>
+        <input className={styles.soul} type="text" maxLength={1} min="0" max="9" defaultValue="0" style={{ bottom: bodySoulBottom}}/>
       </div>
 
       <div className={styles['chevron-extras']} style={{display: showMenu ? "flex" : "none"}}>
